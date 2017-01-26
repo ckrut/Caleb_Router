@@ -10,8 +10,196 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.krut.caleb_router.MainActivity">
 
+    <View
+        android:id="@+id/hiddencenter"
+        android:layout_height="match_parent"
+        android:layout_width="2dp"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true"/>
+
     <TextView
+        android:text="@string/title_bar_text"
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/title_bar_textbox"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#ffffff"
+        android:background="#647b81"
+        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="2dp"
+        android:background="#f00"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/hiddencenter"
+        android:layout_below="@id/title_bar_textbox"
+        android:id="@+id/SnifferRelativeLayout">
+
+        <TextView
+            android:text="@string/sniffer_title_bar_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:gravity="center"
+            android:id="@+id/SnifferTitleBar" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="275dp"
+            android:layout_marginTop="2dp"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:layout_below="@+id/SnifferTitleBar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/CapturedPacketsList" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:layout_marginTop="2dp"
+            android:layout_below="@id/CapturedPacketsList"
+            android:id="@+id/ProtocolExplanations" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:layout_marginTop="2dp"
+            android:layout_below="@id/ProtocolExplanations"
+            android:id="@+id/HexPacketContents" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#f00"
+        android:layout_marginTop="2dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/title_bar_textbox"
+        android:layout_toRightOf="@+id/hiddencenter"
+        android:id="@+id/TableRelativeLayout">
+
+        <TextView
+            android:text="@string/table_title_bar_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:gravity="center"
+            android:id="@+id/TableTitleBar" />
+
+        <TextView
+            android:text="@string/adjacency_table_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TableTitleBar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="2dp"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:gravity="center"
+            android:id="@+id/AdjacencyTableTitle" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="127dp"
+            android:layout_below="@+id/AdjacencyTableTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:id="@+id/AdjacencyTableList" />
+
+        <TextView
+            android:text="@string/arp_table_title_text"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/AdjacencyTableList"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="2dp"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:id="@+id/ARPTableTitle" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="127dp"
+            android:layout_below="@+id/ARPTableTitle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="2dp"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:id="@+id/ARPTableList" />
+
+        <TextView
+            android:text="@string/routing_table_title_text"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ARPTableList"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:id="@+id/RoutingTableTitle" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="127dp"
+            android:layout_below="@+id/RoutingTableTitle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:layout_marginTop="2dp"
+            android:id="@+id/RoutingTableList"/>
+
+        <TextView
+            android:text="@string/forwarding_table_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/RoutingTableList"
+            android:layout_marginTop="2dp"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:gravity="center"
+            android:id="@+id/ForwardingTableTitle" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="127dp"
+            android:layout_marginTop="2dp"
+            android:textColor="#ffffff"
+            android:background="#647b81"
+            android:layout_below="@+id/ForwardingTableTitle"
+            android:id="@+id/ForwardingTableList"/>
+
+    </RelativeLayout>
+
 </RelativeLayout>
