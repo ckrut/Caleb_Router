@@ -16,7 +16,7 @@ import java.util.Observer;
 //UI Manager class which will be used to provide control of the UI in the system and delegates
 //specific UI management to lower level UI classes
 public class UIManager implements Observer {
-
+    //**************FIELDS*******************
     //Gets the activity from the parent activity class
     private Activity parentActivity;
 
@@ -27,6 +27,11 @@ public class UIManager implements Observer {
     private static UIManager ourInstance = new UIManager();
 
     //**************METHODS*******************
+
+    //constructor for the UI manager
+    private UIManager() {
+    }
+
     //returns the UI manager to classes that need it
     public static UIManager getInstance() {
         return ourInstance;
@@ -55,7 +60,5 @@ public class UIManager implements Observer {
         setUpWidgets();
     }
 
-    //constructor for the UI manager
-    private UIManager() {
-    }
+
 }

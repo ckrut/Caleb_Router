@@ -5,9 +5,16 @@ import android.app.Activity;
  */
 //The parentactivity class is used to make sure there is only a single activity for the app
 public class ParentActivities {
+    //*************************FIELDS****************************
     private static Activity parentActivity;
 
     private static ParentActivities ourInstance = new ParentActivities();
+
+    //*************************METHODS***************************
+
+    //Constructor
+    private ParentActivities() {
+    }
 
     //Functions as the getter and setter for the activity
     public static Activity getParentActivity() {
@@ -17,10 +24,8 @@ public class ParentActivities {
         parentActivity = myParent;
     }
 
+    //Returns the current instance of the parent activity
     public static ParentActivities getInstance() {
         return ourInstance;
-    }
-
-    private ParentActivities() {
     }
 }
