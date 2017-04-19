@@ -5,7 +5,11 @@ package com.krut.caleb_router.networks.tablerecord;
  */
 
 public interface TableRecord {
+    //This method will return the key in the record
     Integer getKey();
 
+    //This will return the time passed since the record was last referenced
     Integer getAgeInSeconds();
 }
+
+

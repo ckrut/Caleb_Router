@@ -1,5 +1,7 @@
 package com.krut.caleb_router.support;
 
+import android.util.Log;
+
 import com.krut.caleb_router.networks.Constants;
 import com.krut.caleb_router.networks.datagram.LL2PFrame;
 import com.krut.caleb_router.networks.datagram_fields.CRC;
@@ -7,7 +9,14 @@ import com.krut.caleb_router.networks.datagram_fields.DatagramHeaderField;
 import com.krut.caleb_router.networks.datagram_fields.DatagramPayloadField;
 import com.krut.caleb_router.networks.datagram_fields.LL2PAddressField;
 import com.krut.caleb_router.networks.datagram_fields.LL2PTypeField;
+import com.krut.caleb_router.networks.tablerecord.AdjacencyRecord;
 import com.krut.caleb_router.networks.tablerecord.Datagram;
+import com.krut.caleb_router.networks.tablerecord.TableRecord;
+import com.krut.caleb_router.networks.tablerecord.TableRecordClass;
+
+import java.net.InetAddress;
+
+import static com.krut.caleb_router.networks.Constants.logTag;
 
 /**
  * Created by caleb.krut on 2/16/2017.
@@ -53,5 +62,19 @@ public class Factory {
                 break;
         }
         return datagramfound;
+    }
+
+    public TableRecordClass getTableRecord(Integer recordId, Object [] data){
+        switch (recordId){
+            case Constants.TABLE_RECORD_TYPE_ADJACENCY:             //the number 31
+                InetAddress address = (InetAddress) data[0];
+                Integer ll2pAddress = (Integer) data[1];
+                return new AdjacencyRecord(address,ll2pAddress);
+            case Constants.TABLE_RECORD_TYPE_ARP:                   //the number 30
+            case Constants.TABLE_RECORD_TYPE_ROUTING:               //the number 32
+            default:
+                Log.e(logTag, "createTableRecord: Record Type Factory Crash");
+                return null;
+        }
     }
 }

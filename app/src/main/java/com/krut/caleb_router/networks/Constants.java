@@ -42,6 +42,8 @@ public class Constants implements Observer {
     final public static int LL2P_PAYLOAD_ADDRESS = 23;
     final public static int LL2P_CRC_ADDRESS = 24;
     final public static int LL2P_ARP_ADDRESS = 26;
+
+    //LL2P Address Lengths and positions
     public static int LL2P_DEST_ADDRESS_OFFSET = 0;
     public static int LL2P_ADDRESS_FIELD_LENGTH = 3;
     public static int LL2P_SRC_ADDRESS_OFFSET = 6;
@@ -49,6 +51,13 @@ public class Constants implements Observer {
     public static int LL2P_TYPE_FIELD_LENGTH = 2;
     public static int LL2P_PAYLOAD_OFFSET = 16;
     public static int LL2P_CRC_FIELD_LENGTH = 2;
+
+    //Values for records
+    final public static int TABLE_RECORD_TYPE_ARP = 30;
+    final public static int TABLE_RECORD_TYPE_ADJACENCY = 31;
+    final public static int TABLE_RECORD_TYPE_ROUTING = 32;
+
+    final public static int UDP_PORT = 49999;
 
     public static String IP_ADDRESS;	// the IP address of this system
     //will be stored here in dotted decimal notation

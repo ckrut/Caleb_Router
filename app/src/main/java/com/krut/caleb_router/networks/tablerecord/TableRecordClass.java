@@ -1,34 +1,40 @@
-/*package com.krut.caleb_router.networks.tablerecord;
-//********************Commented out to allow for lab 3 finish********************************
+package com.krut.caleb_router.networks.tablerecord;
+
 import com.krut.caleb_router.support.Utilities;
-*///REMOVE THIS LINE AND UP
+
 /**
- * Created by caleb.krut on 2/2/2017.
+ * Created by caleb.krut on 3/2/2017.
  */
-/*//HERE TO THE BOTTOM
+
 public class TableRecordClass implements TableRecord {
     //^^^^^^^^^^^^^^^^^^^^^^^Fields^^^^^^^^^^^^^^^^^^^^^^^
     private int lastTimeTouched;
 
     //^^^^^^^^^^^^^^^^^^^^^^Methods^^^^^^^^^^^^^^^^^^^^^^^
+    //Constructor which just sets the last time touched
     public TableRecordClass(){
         updateTime();
     }
 
-    public Integer getAgeInSeconds(){
-        return (int) Utilities.getTimeInSeconds() - lastTimeTouched;
-    }
-
-    public Integer getKey(){
-        return null;
-    }
-
+    //Sets the lastTimeTouched to the current time
     public void updateTime(){
         lastTimeTouched = Utilities.getTimeInSeconds();
     }
 
+    //Allows records to compare to each other. Returns - if it is less than the passed record
+    //It returns 0 if they are equal and + if it is greater than the passed one
     public int compareTo(TableRecord tableRecord){
-        return getKey().compareTo(TableRecord.getKey());
+        return this.getKey().compareTo(tableRecord.getKey());
+    }
+
+    //^^^^^^^^^^^^^^Table Record Methods^^^^^^^^^^^^^^^^^
+    //Returns the differece between the current time and the last time touched
+    public Integer getAgeInSeconds(){
+        return Utilities.getTimeInSeconds() - lastTimeTouched;
+    }
+
+    //Each inheriting class will need to override this because this will return null
+    public Integer getKey(){
+        return null;
     }
 }
-*/

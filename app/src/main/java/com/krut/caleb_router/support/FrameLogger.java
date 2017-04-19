@@ -4,11 +4,12 @@ import com.krut.caleb_router.networks.datagram.LL2PFrame;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by caleb.krut on 2/2/2017.
  */
-public class FrameLogger extends Observable{
+public class FrameLogger extends Observable implements Observer{
     //^^^^^^^^^^^^^^^^^^^^^^FIELDS^^^^^^^^^^^^^^^^^^^^^^^^
     private static FrameLogger ourInstance = new FrameLogger();
 

@@ -1,4 +1,4 @@
-/* //TODO Delete this
+
 package com.krut.caleb_router.networks.table;
 
 import com.krut.caleb_router.networks.tablerecord.TableRecord;
@@ -9,19 +9,17 @@ import java.util.List;
 /**
  * Created by caleb.krut on 2/9/2017.
  */
-/* //Todo Delete this
+
 public interface TableInterface {
     List<TableRecord> getTableAsArrayList();
 
-    //TODO AddItem Identifier?
-    TableRecord addItem(TableRecord);
+    TableRecord addItem(TableRecord passedTable) throws LabException;
 
-    TableRecord getItem(TableRecord) throws LabException;
+    TableRecord getItem(TableRecord passedTable) throws LabException;
 
-    TableRecord removeItem(Integer);
+    TableRecord removeItem(Integer recordKey) throws LabException;
 
-    TableRecord getItem(Integer) throws LabException;
+    TableRecord getItem(Integer recordKey) throws LabException;
 
     void Clear();
-}*/
-//TODO Delete this
+}
