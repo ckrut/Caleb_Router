@@ -36,12 +36,14 @@ public class BootLoader extends Observable {
         ParentActivities.setParentActivity(myActivity);
         addObserver(Constants.getInstance());
         addObserver(UIManager.getInstance());
+        addObserver(FrameLogger.getInstance());
+        addObserver(LL1Daemon.getInstance());
+        addObserver(UIManager.getInstance().getTableUI());
 
         //Boots the router
         setChanged();
         notifyObservers();
         Log.i(logTag, "Router is booted!  IP Address is "+Constants.IP_ADDRESS);
-        //UIManager.getInstance().raiseToast("Router is booted!");
 
         try {
             testRouterComponents();
@@ -50,38 +52,65 @@ public class BootLoader extends Observable {
         }
     }
 
-    /*Test for lab 3
-    private void testRouterComponents(){
-        String frameString = "0011223141598008Hi0000";
-        LL2PFrame frame = new LL2PFrame(frameString.getBytes());
-        Log.i(Constants.logTag, "Frame is: "+frame.toString());
-        Log.i(Constants.logTag, "Frame hex is: "+frame.toHexString());
-    }*/
-
-    //Test for lab 4
     private void testRouterComponents() throws LabException{
-        String frameString = "0011223141598008Hi0000";
-        LL2PFrame frame = new LL2PFrame(frameString.getBytes());
-
-        UIManager.getInstance().raiseToast("Frame is: " + frame.toTransmissionString());
-        UIManager.getInstance().raiseToast("Protocol Explanation: " + frame.toProtocolExplanationString());//explanation protocol
-        UIManager.getInstance().raiseToast("The payload is: " + frame.getPayload().toAsciiString());//ascii characters
-        UIManager.getInstance().raiseToast("Hex Characters are: " + frame.toHexString());//Hex String
-        UIManager.getInstance().raiseToast("Summary String is: " + frame.toSummaryString());//Summary
 
         LL1Daemon ll1Daemon = LL1Daemon.getInstance();
-
-        AdjacencyRecord adjacencyRecord = new AdjacencyRecord(GetIPAddress.getInstance().getInetAddress("10.1.1.1"), 0x314159);
-        AdjacencyRecord adjacencyRecord1 = new AdjacencyRecord(GetIPAddress.getInstance().getInetAddress("10.1.1.2"), 0x2E1DA1);
-        Log.d(logTag, "Adjacency Records Created");
-
-        Table table = new Table();
         Log.d(logTag, "Table Created");
-        table.addItem(adjacencyRecord);
-        table.addItem(adjacencyRecord1);
-        Log.d(logTag, "adjacency records added to the table");
-        table.removeItem(0x314159);
-        Log.d(logTag, "adjacency record removed from the table");
-
     }
 }
+
+/*
+package com.pinkpineapplenetworking.insanerouter.support;
+
+import android.app.Activity;
+import android.util.Log;
+
+import com.pinkpineapplenetworking.insanerouter.networks.Constants;
+import com.pinkpineapplenetworking.insanerouter.networks.daemon.LL1Daemon;
+import com.pinkpineapplenetworking.insanerouter.networks.datagrams.LL2PFrame;
+import com.pinkpineapplenetworking.insanerouter.networks.table.Table;
+import com.pinkpineapplenetworking.insanerouter.networks.tablerecord.AdjacencyRecord;
+import com.pinkpineapplenetworking.insanerouter.support.ui.SnifferUI;
+import com.pinkpineapplenetworking.insanerouter.support.ui.TableUI;
+import com.pinkpineapplenetworking.insanerouter.support.ui.UIManager;
+
+import java.util.Observable;
+
+import static com.pinkpineapplenetworking.insanerouter.networks.Constants.RECORD_TYPE_IS_ADJACENCY;
+import static com.pinkpineapplenetworking.insanerouter.networks.Constants.logTag;
+import static com.pinkpineapplenetworking.insanerouter.networks.daemon.LL1Daemon.getInstance;
+
+public class BootLoader extends Observable {
+
+    public BootLoader(Activity bootLoaderActivity) {
+        bootRouter(bootLoaderActivity);
+    }
+
+    private void bootRouter(Activity bootRouterActivity){
+        ParentActivity.setParentActivity(bootRouterActivity);
+        addObserver (Constants.getInstance());
+        addObserver(UIManager.getInstance());
+        addObserver(FrameLogger.getInstance());
+        addObserver(LL1Daemon.getInstance());
+        addObserver(UIManager.getInstance().getTableUI());
+        addObserver(UIManager.getInstance().getSnifferUI());
+        setChanged(); // Notify Observers things have changed
+        notifyObservers();
+
+        UIManager.getInstance().displayMessage("Router Is Up!");
+        try {
+            testRun();
+        } catch (LabException e) {
+            e.printStackTrace();
+        }
+
+        Log.i(logTag, "Router Booted!");
+
+    }
+    private void testRun() throws LabException {
+        LL1Daemon ll1Daemon = LL1Daemon.getInstance();
+        ll1Daemon.addAdjacency("112233", "10.30.56.172");
+    }
+}
+
+ */

@@ -8,4 +8,6 @@
     <string name="routing_table_title_text">Routing Table</string>
     <string name="forwarding_table_title_text">Forwarding Table</string>
     <string name="IPMenuItem">Show Ip Address</string>
+    <string name="DialogueMenuItem">Add Adjacency</string>
+
 </resources>

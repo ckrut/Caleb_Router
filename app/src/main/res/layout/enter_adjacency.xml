@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/enter_adjacency_layout">
+
+    <TextView
+        android:text="Enter Hex LL2P Address Below"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LL2PAddressLabel" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:ems="10"
+        android:id="@+id/LL2PAddressField"
+        android:backgroundTint="#ffcc0000"
+        android:backgroundTintMode="add"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:text="Enter IP Address Below"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/IPAddressLabel" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:ems="10"
+        android:id="@+id/IPAddressField"
+        android:backgroundTint="#ffcc0000"
+        android:backgroundTintMode="add"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:text="Add Adjacency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/AddAdjacencyButton" />
+
+    <Button
+        android:text="Cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CancelButton" />
+</LinearLayout>

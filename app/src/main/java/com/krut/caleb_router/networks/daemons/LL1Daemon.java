@@ -41,6 +41,7 @@ public class LL1Daemon extends Observable implements Observer {
     //^^^^^^^^^^^^^^^^^^^^^METHODS^^^^^^^^^^^^^^^^^^^^^^
     //empty constructor
     private LL1Daemon() {
+        adjacencyTable = new Table();
     }
 
     public static LL1Daemon getInstance() {
@@ -50,7 +51,7 @@ public class LL1Daemon extends Observable implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         openSockets();
-        adjacencyTable = new Table();
+
         nameserver = GetIPAddress.getInstance();
         factory = Factory.getInstance();
         addObserver(FrameLogger.getInstance());
@@ -167,3 +168,134 @@ public class LL1Daemon extends Observable implements Observer {
         }
     }
 }
+
+/*
+package com.pinkpineapplenetworking.insanerouter.networks.daemon;
+
+public class LL1Daemon extends Observable implements Observer {
+    //FIELDS
+    private static LL1Daemon ourInstance = new LL1Daemon();
+    private DatagramSocket receiveSocket; // This is the UDP socket used to receive frames
+    private DatagramSocket sendSocket;// this is the UDP socket used to send frames
+    private Table adjacencyTable;     //   this is the table object that maintains adjacency relationships between
+    private GetIPAddress nameserver;
+    private UIManager uiManager;
+    private Factory factory;
+
+    //METHODS
+    private LL1Daemon() { //Constructor
+        adjacencyTable = new Table();
+    }
+
+    public static LL1Daemon getInstance() {
+        return ourInstance;
+    }
+
+    public void update (Observable observable, Object o){
+        if (observable.getClass() == BootLoader.class){
+            openSockets();
+            nameserver = GetIPAddress.getInstance();
+            factory = Factory.getInstance();
+            addObserver(FrameLogger.getInstance());
+            uiManager = UIManager.getInstance();
+            new ReceiveUnicastFrame().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, receiveSocket);
+        }
+        addObserver(FrameLogger.getInstance());
+    }
+
+    private void openSockets(){
+        try {
+            sendSocket = new DatagramSocket();
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        Log.d(Constants.logTag, "Send Socket Setup Successful");
+
+        try {
+            receiveSocket = new DatagramSocket(UDP_PORT);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        Log.d(Constants.logTag, "Receive Socket Setup Successful");
+    }
+
+    public void removeAdjacency(AdjacencyRecord recordToRemove) throws LabException {
+        adjacencyTable.removeItem(recordToRemove.getKey());
+    }
+    public Table getAdjacencyTable(){
+        return adjacencyTable;
+    }
+
+    public void addAdjacency(String ll2pAddress, String ipAddress) {
+        AdjacencyRecord adjacencyRecord = (AdjacencyRecord) factory.getInstance().
+                createTableRecord(RECORD_TYPE_IS_ADJACENCY);
+        adjacencyRecord.setIpAddress(nameserver.getInetAddress(ipAddress));
+        adjacencyRecord.setLl2pAddress(Integer.valueOf(ll2pAddress,16));
+
+        adjacencyTable.addItem(adjacencyRecord);
+    }
+
+    public void sendFrame(LL2PFrame ll2p){
+
+        String frameToSend = new String(ll2p.toString());
+        boolean foundValidAddress = true;
+
+        uiManager.displayMessage("Sending Packet");
+        InetAddress IPAddress;
+
+        try {
+            AdjacencyRecord record = (AdjacencyRecord) adjacencyTable.
+                    getItem(ll2p.getDestinationAddress().getAddress());
+            IPAddress = record.getIpAddress();
+
+            DatagramPacket sendPacket = new DatagramPacket(frameToSend.getBytes(),
+                    frameToSend.length(), IPAddress, UDP_PORT);
+            new SendUnicastFrame().execute(new PacketInformation(sendSocket,sendPacket));
+            setChanged();
+            notifyObservers(ll2p);
+
+        }
+        catch (LabException e) {
+            foundValidAddress = false;
+        }
+    }
+
+    protected class SendUnicastFrame extends AsyncTask<PacketInformation, Void, Void>{
+        @Override
+        protected Void doInBackground(PacketInformation... packetInformation) {
+            PacketInformation packetInfo = packetInformation[0];
+            try{
+                packetInfo.getSocket().send(packetInfo.getPacket());
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    private class ReceiveUnicastFrame extends AsyncTask<DatagramSocket, Void, byte[]> {
+
+        @Override
+        protected byte[] doInBackground(DatagramSocket... socketList) {
+            byte[] receiveData = new byte[1024];   // byte array to store received bytes.
+            DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+
+            try {
+                receiveSocket.receive(receivePacket); // check the socket for packet.
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return new String(receivePacket.getData()).substring(0,receivePacket.getLength()).getBytes();
+        }
+
+        @Override
+        protected void onPostExecute(byte[] frameBytes) {
+            LL2PFrame ll2PFrame = new LL2PFrame(frameBytes);
+            setChanged();
+            notifyObservers(ll2PFrame);
+
+            new ReceiveUnicastFrame().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, receiveSocket);
+            Log.e(Constants.logTag, "received from host "+new String(frameBytes) + " ");
+        }
+    }
+}*/
